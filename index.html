@@ -1,0 +1,1247 @@
+<?php include('path/to/config.php'); ?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+ <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      background-color: #121212; /* Dark background color */
+      color: #f2f2f2; /* Light text color */
+      line-height: 1.6;
+      overflow-x: hidden; /* Hide horizontal scrollbar */
+    }
+
+    header {
+      background-color:#121212;
+      color: #f2f2f2;
+      text-align: center;
+      padding: 1em 0;
+    }
+
+    nav {
+      background-color: #3a3a3a;
+      padding: 1em 0;
+    }
+
+    nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    nav li {
+      margin: 0 15px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #f2f2f2; /* White text */
+      font-weight: bold;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #bf8500; /* Highlight color on hover */
+    }
+
+    main {
+      width: 100%;
+      text-align: center;
+    }
+
+    .slideshow {
+      width: 100%;
+      height: 70vh; /* Adjust the height of your slideshow */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .slide {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .page-content {
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+      margin: 20px 0;
+      background-color: #121212; /* Content background color */
+    }
+
+    .home-image {
+      width: 2000px;
+      height: 640px; /* Adjust to cover the full height of the container */
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    footer {
+      background-color: #2b2b2b; /* Footer background color */
+      color: #f2f2f2; /* White text */
+      text-align: center;
+      padding: 1em 0;
+    }
+
+    header h1 {
+      color: #bf8500; /* Header text color for emphasis */
+      font-size: 30px;
+      font-family: Broadway;
+      
+    }
+    header h2 {
+  color: white; 
+  margin-bottom: 15px;
+  font-family: Brush Script MT; 
+  font-size: 40px; 
+  text-align: left;
+  position: absolute; 
+  top: 10px;
+  left: 30px; 
+    }
+
+    h1 {
+      color: #bf8500; /* Header text color for emphasis */
+    }
+
+    h2 {
+      color: #bf8500; /* Heading text color for emphasis */
+      margin-bottom: 20px;
+       font-family: Arial Black;
+    }
+
+    p {
+      color: #f2f2f2; /* Light gray text color for better readability */
+    }
+
+    .menu-section {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .menu-item {
+      background-color: #121212; /* Dark background color for menu items */
+      border: 1px solid #2b2b2b; /* Darker border color */
+      border-radius: 8px;
+      padding: 15px;
+      text-align: left;
+      color: #bf8500; /* Text color for emphasis */
+      width: calc(20% - 20px);
+      margin-bottom: 20px;
+    }
+
+    .menu-item img {
+  width: 200px;
+  height: 150px;
+  object-fit: cover; /* This property ensures the image maintains its aspect ratio and covers the specified dimensions */
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+    .menu-item table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    .menu-item th,
+    .menu-item td {
+      border: 1px solid #2b2b2b; /* Darker border color */
+      padding: 8px;
+      text-align: center;
+    }
+
+    .menu-links {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .menu-links li {
+      margin-right: 20px;
+    }
+
+    .quantity-controls,
+    .menu-links {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+      
+    }
+
+    .quantity-controls button {
+      background-color: #bf8500; /* Button background color */
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .quantity-controls button:hover {
+      background-color: #996300; /* Darker button color on hover */
+    }
+
+    .menu-item button {
+      margin-top: auto;
+      background-color: #bf8500; /* Button background color */
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .menu-item button:hover {
+      background-color: #996300; /* Darker button color on hover */
+    }
+
+    .reservation-form {
+      background-color: black; /* Dark background color for reservation section */
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+      margin: 20px 0;
+    }
+
+    .reservation-form label {
+      color: #bf8500; /* Label text color for emphasis */
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .reservation-form input,
+    .reservation-form button {
+      background-color: #bf8500; /* Input and button background color */
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+
+    .reservation-form button:hover {
+      background-color: #996300; /* Darker button color on hover */
+    }
+
+    .about-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .about-image img {
+      width: 100%;
+      max-width: 1000px;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    }
+
+    .about-text {
+      text-align: center;
+      color: #bf8500; /* Text color for emphasis */
+    }
+
+    .contact-details {
+      display: flex;
+      justify-content: space-around;
+      background-color: #121212; /* Dark background color for contact section */
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+      margin: 20px 0;
+    }
+
+    .contact-details div {
+      text-align: center;
+    }
+
+    .contact-details i {
+      color: #bf8500; /* Icon color for emphasis */
+      font-size: 40px;
+      margin-bottom: 10px;
+    }
+
+    .contact-details h3 {
+      color: #bf8500; /* Heading text color for emphasis */
+      margin-bottom: 15px;
+    }
+
+    .operating-hours,
+    .our-services {
+      margin-top: 30px;
+    }
+
+    .operating-hours ul,
+    .our-services ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .operating-hours li,
+    .our-services li {
+      margin-bottom: 10px;
+    }
+
+    .operating-hours h3,
+    .our-services h3 {
+      color: #bf8500; /* Heading text color for emphasis */
+      margin-bottom: 15px;
+    }
+
+    .contact-form {
+      background-color: black; /* Dark background color for contact section */
+      color: #f2f2f2; /* Light text color */
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+      margin: 20px 0;
+    }
+
+    .contact-form label {
+      color: #bf8500; /* Label text color for emphasis */
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .contact-form input,
+    .contact-form textarea,
+    .contact-form button {
+      background-color: #996300; /* Darker brown background color for inputs and buttons */
+      color: white;
+      padding: 15px;
+      border: none;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      width: 100%;
+      box-sizing: border-box;
+      transition: background-color 0.3s;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      background-color: #bf8500; /* Darker brown on focus */
+    }
+
+    .contact-form button:hover {
+      background-color: #bf8500; /* Darker brown on hover */
+    }
+
+    .contact-form textarea {
+      resize: vertical; /* Allow vertical resizing of the textarea */
+    }
+
+    .contact-form h3 {
+      color: #bf8500; /* Heading text color for emphasis */
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .food-category-button {
+      background-color: #8b0000;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+      margin-right: 5px;
+    }
+    .services-table {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.service {
+  text-align: center;
+  margin: 10px;
+}
+
+.service img {
+  width: 450px;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+ .cart-container {
+      display: none;
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-top: 10px;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 5px;
+    }
+
+    .cart-item button {
+      background-color: #ff0000;
+      color: #fff;
+      border: none;
+      padding: 5px;
+      cursor: pointer;
+    }
+
+    /* Added styles for the form and order confirmation */
+    #orderForm, #orderConfirmation {
+      display: none;
+      margin-top: 20px;
+    /* Add these styles to the appropriate sections of your existing CSS file */
+
+form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      text-align: left;
+      margin-bottom: 8px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      background-color: #8b0000;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #996300;
+    
+}
+  </style>
+
+  <title>FoodieFavoriteFinds Restaurant</title>
+</head>
+
+<body>
+  <header>
+    <h1><b>Foodie Favorite Finds</b></h1>
+    <h2><b>Sangavi</b></h2>
+  </header>
+
+   <nav>
+    <ul class="pages">
+      <li class="active"><a href="#" onclick="loadPage('home')">Home</a></li>
+      <li><a href="#" onclick="loadPage('menu')">Menu</a></li>
+      <li><a href="#" onclick="loadPage('about')">About</a></li>
+      <li><a href="#" onclick="loadPage('book')">Book Table</a></li>
+      <li><a href="#" onclick="loadPage('contact')">Contact Us</a></li>
+    </ul>
+  </nav>
+  <main>
+   <div id="home" class="page-content" style="display: block;">
+  <section class="home-section">
+    <div class="home-background">
+      <img src="https://wallpaperaccess.com/full/1127273.jpg" alt="FoodieFavoriteFinds" class="home-image" />
+    </div>
+    <div class="home-content">
+       <h2>Welcome to <b>FoodieFavoriteFinds Seaside Restaurant</b></h2>
+     <p><b>Indulge in a culinary journey where every dish is a masterpiece. Experience the perfect blend of flavors and textures that will tantalize your taste buds.</b></P>
+  <p><b>Order online for a trendy dining experience or visit us for an unforgettable feast!</b></p>
+</div>
+      <div style="text-align: center; margin-top: 20px;">
+        <a href="#" onclick="loadPage('menu')" style="background-color: #8b0000; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: bold;">View Menu</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+    <div id="menu" class="page-content">
+      <h2 style="text-align: center; color: #a8763e; font-weight: bold; margin-bottom: 10px;">Menu</h2>
+      <div class="menu-links">
+        
+          <a href="#" onclick="loadFoods('all')" class="food-category-button">All</a></li>
+          <a href="#" onclick="loadFoods('starters')" class="food-category-button">Starters</a></li>
+          <a href="#" onclick="loadFoods('soup')" class="food-category-button">Soup</a></li>
+          <a href="#" onclick="loadFoods('salads')" class="food-category-button">Salads</a></li>
+          <a href="#" onclick="loadFoods('mainCourses')" class="food-category-button">Main Courses</a></li>
+          <a href="#" onclick="loadFoods('desserts')" class="food-category-button">Desserts</a></li>
+          <a href="#" onclick="loadFoods('softDrinks')" class="food-category-button">Soft Drinks</a></li>
+          <a href="#" onclick="loadFoods('fastFoods')" class="food-category-button">Fast Foods</a></li>
+        
+      </div>
+      <div id="foodVarieties" class="menu-section"></div>
+    </div>
+    <!-- Add these forms to the appropriate sections of your existing HTML file -->
+
+ <!-- Registration Form -->
+  <div id="registration" class="page-content">
+    <h2>Register</h2>
+    <form id="registrationForm">
+      <label for="regUsername">Username:</label>
+      <input type="text" id="regUsername" name="regUsername" required>
+
+      <label for="regEmail">Email:</label>
+      <input type="email" id="regEmail" name="regEmail" required>
+
+      <label for="regPassword">Password:</label>
+      <input type="password" id="regPassword" name="regPassword" required>
+
+      <button type="button" onclick="registerUser()">Register</button>
+    </form>
+  </div>
+
+  <!-- Login Form -->
+  <div id="login" class="page-content">
+    <h2>Login</h2>
+    <form id="loginForm">
+      <label for="loginUsername">Username:</label>
+      <input type="text" id="loginUsername" name="loginUsername" required>
+
+      <label for="loginPassword">Password:</label>
+      <input type="password" id="loginPassword" name="loginPassword" required>
+
+      <button type="button" onclick="loginUser()">Login</button>
+    </form>
+  </div>
+    <div id="about" class="page-content">
+  <section>
+    <h2>About Us</h2>
+    <div class="about-content">
+      <div class="about-text">
+        
+        <p><b>At Foodie Favorite Finds, we are passionate about crafting memorable moments through exceptional food and warm hospitality by the sea.</b></p>
+      </div>
+      <div class="about-image">
+        <img src="https://wallpaperaccess.com/full/3014609.jpg" alt="Restaurant Interior">
+      </div>
+    </div>
+  </section>
+  <section class="operating-hours">
+    <h3>Operating Hours</h3>
+    <ul>
+      <li><strong>Monday - Friday:</strong> 11:00 AM - 10:00 PM</li>
+      <li><strong>Saturday - Sunday:</strong> 5:00 PM - 12:00 PM</li>
+    </ul>
+  </section>
+  <section class="our-services">
+    <h3>Our Services</h3>
+    <div class="services-table">
+      <div class="service">
+        <img src="https://www.blinkco.io/wp-content/uploads/2021/08/food-ordering-systems-for-restaurants.jpg">
+        <p><b>Online Ordering</b></p>
+      </div>
+      <div class="service">
+        <img src="https://www.hotelierindia.com/cloud/2021/11/22/DTOm7Duo-shutterstock_1278665539_3.jpg" alt="Reservations">
+        <p><b>Reservations</b></p>
+      </div>
+      <div class="service">
+        <img src="https://img.freepik.com/photos-premium/buffet-food-catering-food-party-made-by-aiintelligence-artificielle_41969-12071.jpg" alt="Catering">
+        <p><b>Catering</b></p>
+      </div>
+    </div>
+  </section>
+</div>
+ <div id="book" class="page-content">
+    <section style="display: flex; align-items: center;">
+        <!-- Half-page image -->
+        <div style="flex: 1;">
+            <img src="https://www.urbanjourney.com/wp-content/uploads/2022/09/Turks-and-Caicos-Best-Restaurants-Infiniti-1024x684.png" alt="Book a Table Image" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);" width="100%" height="100%">
+        </div>
+
+        <!-- Half-page reservation form -->
+        <div style="flex: 1;">
+            <h2>Book a Table</h2>
+            <p><b>We want to ensure you have the best dining experience. Please consider booking your table at least a day in advance to secure your spot and allow us to better serve you.</b></p>
+            <div class="reservation-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date" required>
+
+                <label for="time">Time:</label>
+                <input type="time" id="time" name="time" required></br>
+
+                <button type="button" onclick="submitReservation()"style="background-color:#8b0000; color: #fff;">Book Now</button>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<div id="contact" class="page-content">
+  <section>
+    <h2>Contact Us</h2>
+    <div class="contact-info">
+      <p>Visit us at Foodie Favorite Finds, Sri Lanka, Colombo West</p>
+      <p>For inquiries, call us at +94 (76) 701-2345</p>
+      <p>Email: demo@gmail.com</p>
+    </div>
+    <div class="contact-form">
+      <h3>Send us a Message</h3>
+      <form id="contactForm">
+        <label for="contactName">Name:</label>
+        <input type="text" id="contactName" name="contactName" required>
+        <label for="contactEmail">Email:</label>
+        <input type="email" id="contactEmail" name="contactEmail" required>
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
+     <button type="button" onclick="submitMessage()" style="background-color:#8b0000; color: #fff; padding: 15px 30px; width: 200px;">Send Message</button>
+
+
+      </form>
+    </div>
+  </section>
+</div>
+ <!-- Cart container -->
+  <div id="cartContainer" class="cart-container">
+    <h2>Shopping Cart</h2>
+    <div id="cartList"></div>
+    <div id="total"></div>
+    <button onclick="reviewCart()">Review Cart</button>
+  </div>
+
+  <!-- Order form -->
+<div id="orderForm">
+  <h2>Order Details</h2>
+  <form>
+    <label for="name">Name:</label>
+    <input type="text" id="name" required>
+    <br>
+
+    <label for="phoneNumber">Telephone Number:</label>
+    <input type="tel" id="phoneNumber" required>
+    <br>
+
+    <label for="location">Location:</label>
+    <input type="text" id="location" required>
+    <br>
+
+    <label for="paymentMethod">Payment Method:</label>
+    <select id="paymentMethod" required>
+      <option value="creditCard">Credit Card</option>
+      <option value="debitCard">Debit Card</option>
+      <option value="paypal">PayPal</option>
+      <option value="cashOnDelivery">Cash on Delivery</option>
+      <!-- Add more payment options as needed -->
+    </select>
+    <br>
+
+    <button type="button" onclick="placeOrder()">Place Order</button>
+  </form>
+</div>
+
+<!-- Order confirmation -->
+<div id="orderConfirmation">
+  <h2>Order Confirmation</h2>
+  <p>Your order has been placed. Thank you!</p>
+  <p>Payment Method: <span id="confirmedPaymentMethod"></span></p>
+  <button onclick="placeAnotherOrder()">Place Another Order</button>
+</div>
+  </main>
+
+  <footer>
+    <p><b>&copy; 2023 FoodieFavoriteFinds Restaurant. All rights reserved.</b></p>
+  </footer>
+
+  <script>
+         var cart = [];
+
+function loadFoods(category) {
+    var foods = getFoodsByCategory(category);
+
+    var foodVarieties = document.getElementById('foodVarieties');
+    foodVarieties.innerHTML = '';
+
+    for (var i = 0; i < foods.length; i++) {
+      var foodItem = foods[i];
+      var itemHtml = `
+        <div class="menu-item">
+          <img src="${foodItem.image}" alt="${foodItem.name}">
+          <h3>${foodItem.name}</h3>
+          <p>${foodItem.description}</p>
+          <table>
+            <tr>
+              <th>Price</th>
+              <th>Quantity</th>
+            </tr>
+            <tr>
+              <td>${foodItem.price}</td>
+              <td>
+                <div class="quantity-controls">
+                  <button onclick="decreaseQuantity(this)">-</button>
+                  <span>1</span>
+                  <button onclick="increaseQuantity(this)">+</button>
+                </div>
+              </td>
+            </tr>
+          </table>
+          <button onclick="addToCart('${foodItem.name}', ${foodItem.price})">Add to Cart</button>
+        </div>
+      `;
+      foodVarieties.innerHTML += itemHtml;
+    }
+  }
+
+    function getAllFoods() {
+      var allFoods = [
+         // Starters
+  {
+    name: 'Avocado Toast',
+    description: 'Toasted bread with garlic butter',
+    price: 500.00,
+    category: 'starters',
+    image: 'https://thesaltypot.com/wp-content/uploads/2019/02/Avocado-Toast09-720x720.jpg'
+  },
+  {
+    name: 'Sushi Burritos',
+    description: 'Fried chicken wings with choice of sauce',
+    price: 250.00,
+    category: 'starters',
+    image: 'https://fitfoodiefinds.com/wp-content/uploads/2023/03/Sushi-Burrito-sq.jpg'
+  },
+  {
+    name: 'Acai Bowls',
+    description: 'Healthy and refreshing acai bowl',
+    price: 500.00,
+    category: 'starters',
+    image: 'https://www.tropicalacai.com/wp-content/uploads/2023/03/Hawaii-Rainbow-Acai-Bowl.png'
+  },
+  {
+    name: 'Quinoa Bowls',
+    description: 'Nutritious quinoa bowl with fresh vegetables',
+    price:350.00,
+    category: 'starters',
+    image: 'https://images.themodernproper.com/billowy-turkey/production/posts/2015/Quinoa-Bowl-7.jpg?w=1200&h=1800&q=82&fm=jpg&fit=crop&crop=focalpoint&fp-x=0.5&fp-y=0.6409&dm=1599770424&s=fd135481fec117acc3e5327cc1a217cc'
+  },
+  {
+    name: 'Garlic Bread',
+    description: 'Toasted bread with garlic butter',
+    price: 300.00,
+    category: 'starters',
+    image: 'https://spicecravings.com/wp-content/uploads/2021/09/Air-Fryer-Garlic-Bread-Featured.jpg'
+  },
+  {
+    name: 'Chicken Wings',
+    description: 'Fried chicken wings with choice of sauce',
+    price: 1000.00,
+    category: 'starters',
+    image: 'https://thewoksoflife.com/wp-content/uploads/2022/12/air-fryer-hot-wings-19.jpg'
+  },
+  {
+    name: 'Bruschetta',
+    description: 'Toasted bread with garlic butter',
+    price: 700.00,
+    category: 'starters',
+    image: 'https://www.lifeasastrawberry.com/wp-content/uploads/2012/11/warm-bruschetta-1.jpg'
+  },
+  {
+    name: 'Mozzarella Sticks',
+    description: 'Fried chicken wings with choice of sauce',
+    price: 600.00,
+    category: 'starters',
+    image: 'https://images.themodernproper.com/billowy-turkey/production/posts/2021/Homemade-Mozzarella-Sticks-9.jpeg?w=960&h=960&q=82&fm=jpg&fit=crop&dm=1638935116&s=2574b8da89d966ee167111e9822a0b4e'
+  },
+
+  // Soups
+  {
+    name: 'Soup of the Day',
+    description: 'Chef\'s special soup',
+    price: 500.00,
+    category: 'soup',
+    image: 'https://www.baldinirestaurant.com/ecosoft_shoj/wp-content/uploads/2021/11/Soup-of-the-day.jpg'
+  },
+  {
+    name: 'Tomato Basil Soup',
+    description: 'Classic tomato soup with basil',
+    price: 300.00,
+    category: 'soup',
+    image: 'https://avirtualvegan.com/wp-content/uploads/2022/08/Tomato-Basil-Soup-A-Virtual-Vegan-2.jpg'
+  },
+  {
+    name: 'Chicken Noodle Soup',
+    description: 'Chef\'s special soup with tender chicken',
+    price: 800.00,
+    category: 'soup',
+    image: 'https://www.browneyedbaker.com/wp-content/uploads/2020/11/chicken-noodle-soup-8-square.jpg'
+  },
+  {
+    name: 'Minestrone Soup',
+    description: 'Classic tomato soup with basil and mixed vegetables',
+    price: 400.00,
+    category: 'soup',
+    image: 'https://feelgoodfoodie.net/wp-content/uploads/2020/01/Vegetarian-Minestrone-Soup-9-1.jpg'
+  },
+
+  // Salads
+  {
+    name: 'Caesar Salad',
+    description: 'Fresh romaine lettuce with Caesar dressing',
+    price: 600.00,
+    category: 'salads',
+    image: 'https://www.gittaskitchen.com/wp-content/uploads/2020/07/Caesar-Salad-with-brown-salad-tongs.jpg'
+  },
+  {
+    name: 'Greek Salad',
+    description: 'Mixed greens with feta cheese and olives',
+    price: 500.00,
+    category: 'salads',
+    image: 'https://www.italianbellavita.com/wp-content/uploads/2022/08/739C7136-CBA2-4DDC-8D56-ECA409F69AB9-3-735x735.jpeg'
+  },
+  {
+    name: 'Cobb Salad',
+    description: 'Classic Cobb salad with fresh ingredients',
+    price: 400.00,
+    category: 'salads',
+    image: 'https://healthyrecipesblogs.com/wp-content/uploads/2020/08/cobb-salad-featured-2022.jpg'
+  },
+  {
+    name: 'Quinoa Salad',
+    description: 'Nutritious quinoa salad with feta cheese and olives',
+    price: 300.00,
+    category: 'salads',
+    image: 'https://www.healthyseasonalrecipes.com/wp-content/uploads/2016/04/southwest-quinoa-salad-with-mango-and-black-beans-sq-040.jpg'
+  },
+
+  // Main Courses
+  {
+    name: 'Chef\'s Special Chicken Parmesan',
+    description: 'Breaded chicken with marinara sauce and cheese',
+    price: 1000.00,
+    category: 'mainCourses',
+    image: 'https://cdn.scrambledchefs.com/wp-content/uploads/2021/09/Chicken-Parmesan-Feature.jpg'
+  },
+  {
+    name: 'Grilled Salmon with Lemon Butter',
+    description: 'Salmon fillet grilled to perfection',
+    price: 1000.00,
+    category: 'mainCourses',
+    image: 'https://mojo.generalmills.com/api/public/content/SHl5sKuzf0S2u4ztxv6K8A_gmi_hi_res_jpeg.jpeg?v=d0469d6b&t=466b54bb264e48b199fc8e83ef1136b4'
+  },
+  {
+    name: 'Vegetarian Lasagna',
+    description: 'Vegetarian lasagna with layers of pasta, vegetables, and cheese',
+    price: 800.00,
+    category: 'mainCourses',
+    image: 'https://cookingwithcoit.com/wp-content/uploads/2021/05/CARD_Vegetarian-Lasagna.jpg'
+  },
+  {
+    name: 'Beef Tenderloin Steak',
+    description: 'Juicy beef tenderloin steak grilled to perfection',
+    price: 1000.00,
+    category: 'mainCourses',
+    image: 'https://s23209.pcdn.co/wp-content/uploads/2020/12/Garlic-Rosemary-Beef-TenderloinIMG_1412.jpg'
+  },
+  {
+    name: 'Shrimp Scampi Pasta',
+    description: 'Delicious shrimp scampi pasta with garlic and butter sauce',
+    price: 850.00,
+    category: 'mainCourses',
+    image: 'https://thecozycook.com/wp-content/uploads/2023/06/Shrimp-Scampi-f.jpg'
+  },
+  {
+    name: 'Chicken Biryani Bliss',
+    description: 'Flavorful chicken biryani with aromatic spices',
+    price: 1500.00,
+    category: 'mainCourses',
+    image: 'https://img.freepik.com/premium-photo/authentic-biryani-bliss-glistening-spices-tender-meats-traditional-handi_818261-17948.jpg'
+  },
+  {
+    name: 'Paneer Tikka Masala',
+    description: 'Paneer tikka masala with rich and creamy tomato-based curry',
+    price: 1200.00,
+    category: 'mainCourses',
+    image: 'https://s3.amazonaws.com/static.realcaliforniamilk.com/media/recipes_2/paneer-tikka-masala.jpg'
+  },
+  {
+    name: 'Vegetable Korma Delight',
+    description: 'Vegetable korma with a delightful mix of vegetables and spices',
+    price: 900.00,
+    category: 'mainCourses',
+    image: 'https://tajrestaurant.com/wp-content/uploads/2013/12/213.jpg'
+  },
+  {
+    name: 'Tandoori Lamb Feast',
+    description: 'Tandoori lamb cooked to perfection',
+    price: 2000.00,
+    category: 'mainCourses',
+    image: 'https://data.thefeedfeed.com/recommended/post_691118.jpeg'
+  },
+  {
+    name: 'Butter Chicken Delight',
+    description: 'Butter chicken with a rich and creamy tomato-based curry',
+    price: 1100.00,
+    category: 'mainCourses',
+    image: 'https://thecozycook.com/wp-content/uploads/2023/06/Shrimp-Scampi-f.jpg'
+  },
+
+  // Desserts
+  {
+    name: 'Chocolate Lava Cake',
+    description: 'Warm chocolate cake with a gooey center',
+    price: 500.00,
+    category: 'desserts',
+    image: 'https://sallysbakingaddiction.com/wp-content/uploads/2017/02/chocolate-molten-lava-cakes.jpg'
+  },
+  {
+    name: 'New York Cheesecake',
+    description: 'Classic New York-style cheesecake',
+    price: 600.00,
+    category: 'desserts',
+    image: 'https://stateofdinner.com/wp-content/uploads/2021/07/mini-new-york-cheesecake-featured.jpg'
+  },
+  {
+    name: 'Tiramisu',
+    description: 'Classic Italian tiramisu with coffee and mascarpone',
+    price: 550.00,
+    category: 'desserts',
+    image: 'https://www.jocooks.com/wp-content/uploads/2012/05/strawberry-tiramisu-trifle-1.jpg'
+  },
+  {
+    name: 'Fruit Sorbet',
+    description: 'Refreshing fruit sorbet with a variety of flavors',
+    price: 450.00,
+    category: 'desserts',
+    image: 'https://www.asweetpeachef.com/wp-content/uploads/2017/07/easy-fruit-sorbet-recipes.jpg'
+  },
+
+  // Soft Drinks
+  {
+    name: 'Coffee',
+    description: 'Hot and invigorating coffee',
+    price: 400.00,
+    category: 'softDrinks',
+    image: 'https://neurosciencenews.com/files/2023/06/coffee-brain-caffeine-neuroscincces.jpg'
+  },
+  {
+    name: 'Matcha Lattes',
+    description: 'Refreshing matcha latte with a touch of sweetness',
+    price: 600.00,
+    category: 'softDrinks',
+    image: 'https://www.eatingbirdfood.com/wp-content/uploads/2021/04/iced-matcha-latte-hero.jpg'
+  },
+  {
+    name: 'Kombucha',
+    description: 'Fermented kombucha tea for a probiotic boost',
+    price: 700.00,
+    category: 'softDrinks',
+    image: 'https://health.wordpress.clevelandclinic.org/wp-content/uploads/sites/3/2018/07/kombucha-Tea-518549438-770x533-1.jpg'
+  },
+   {
+    name: 'Smoothies',
+    description: 'Refreshing fruit smoothies with a blend of flavors',
+    price: 550.00,
+    category: 'softDrinks',
+    image: 'https://thekitchencommunity.org/wp-content/uploads/2021/04/Smoothies-1200x675.jpg'
+  },
+          {
+          name: 'Fruit Infused Water',
+          description: 'Refreshing fruit-infused water for a burst of natural flavors',
+          price: 500.00,
+          category: 'softDrinks',
+          image: 'https://i.ndtvimg.com/i/2018-04/flavoured-water-650_650x400_41522836210.jpg'
+        },
+        {
+          name: 'Coconut Water',
+          description: 'Hydrating coconut water with a hint of sweetness',
+          price: 300.00,
+          category: 'softDrinks',
+          image: 'https://images.healthshots.com/healthshots/en/uploads/2023/09/20075617/coconut-water-3.jpg'
+        },
+        {
+          name: 'Vegetable Juices',
+          description: 'Healthy and refreshing vegetable juices for a nutrient boost',
+          price: 400.00,
+          category: 'softDrinks',
+          image: 'https://vaya.in/wp-content/uploads/2021/07/Ten-Healthy-Vegetable-Juices-for-a-Glowing-skin.jpg'
+        },
+        {
+          name: 'Sparkling Water',
+          description: 'Bubbly and refreshing sparkling water',
+          price: 600.00,
+          category: 'softDrinks',
+          image: 'https://shine365.marshfieldclinic.org/wp-content/uploads/2019/07/Carbonated-Water-47934101_Inside-450x400.jpg'
+        },
+        {
+          name: 'Ginger Ale',
+          description: 'Classic ginger ale with a zesty kick',
+          price: 350.00,
+          category: 'softDrinks',
+          image: 'https://sweetestsource.com/wp-content/uploads/2022/10/ginger-ale-scaled.jpg'
+        },
+        {
+          name: 'Iced Tea',
+          description: 'Chilled iced tea for a cool and refreshing experience',
+          price: 500.00,
+          category: 'softDrinks',
+          image: 'https://natashaskitchen.com/wp-content/uploads/2021/07/Iced-Tea-SQ-1.jpg'
+        },
+        // Add more soft drink items...
+
+        {
+          name: 'Chicken Quesadilla',
+          description: 'Grilled chicken with cheese in a tortilla',
+          price: 1400.00,
+          category: 'fastFoods',
+          image: 'https://hips.hearstapps.com/hmg-prod/images/chicken-quesadilla-index-64515c8e98e28.jpg?crop=1xw:0.9994669509594882xh;center,top&resize=1200:*'
+        },
+        {
+          name: 'Fries',
+          description: 'Crispy and golden french fries for a delightful snack',
+          price: 500.00,
+          category: 'fastFoods',
+          image: 'https://thecozycook.com/wp-content/uploads/2020/02/Copycat-McDonalds-French-Fries-.jpg'
+        },
+        {
+          name: 'Veggie Wrap',
+          description: 'Fresh and flavorful veggie wrap with assorted vegetables',
+          price: 600.00,
+          category: 'fastFoods',
+          image: 'https://www.superhealthykids.com/wp-content/uploads/2014/07/veggie-wrap-featured-image-square-1.jpg'
+        },
+        {
+          name: 'Chicken Tenders',
+          description: 'Tender and juicy chicken tenders for a satisfying meal',
+          price: 1900.00,
+          category: 'fastFoods',
+          image: 'https://www.happyfoodstube.com/wp-content/uploads/2021/03/air-fryer-chicken-tenders-2.jpg'
+        },
+        {
+          name: 'Classic Cheeseburger',
+          description: 'Juicy beef patty with melted cheese in a soft bun',
+          price: 900.00,
+          category: 'fastFoods',
+          image: 'https://www.recipetineats.com/wp-content/uploads/2022/08/Stack-of-cheeseburgers.jpg'
+        },
+        {
+          name: 'Pizza',
+          description: 'Delicious pizza with a variety of toppings',
+          price: 1500.00,
+          category: 'fastFoods',
+          image: 'https://kauveryhospital.com/blog/wp-content/uploads/2021/04/pizza-5179939_960_720.jpg'
+        },
+      ];
+      return allFoods;
+    }
+
+    function getFoodsByCategory(category) {
+      var allFoods = getAllFoods();
+      if (category === 'all') {
+        return allFoods;
+      } else {
+        return allFoods.filter(function (food) {
+          return food.category === category;
+        });
+      }
+    }
+
+    function decreaseQuantity(button) {
+      var quantityElement = button.parentElement.querySelector('span');
+      var quantity = parseInt(quantityElement.textContent);
+      if (quantity > 1) {
+        quantityElement.textContent = quantity - 1;
+      }
+    }
+
+    function increaseQuantity(button) {
+      var quantityElement = button.parentElement.querySelector('span');
+      var quantity = parseInt(quantityElement.textContent);
+      quantityElement.textContent = quantity + 1;
+    }
+
+    function addToCart(foodName, foodPrice) {
+      var quantity = parseInt(document.querySelector('.quantity-controls span').textContent);
+      var total = quantity * foodPrice;
+
+      var cartItem = { name: foodName, price: foodPrice, quantity: quantity, total: total };
+      cart.push(cartItem);
+
+      // Update the cart display
+      updateCart();
+    }
+
+    function removeItem(index) {
+      // Remove the item from the cart
+      cart.splice(index, 1);
+      updateCart();
+    }
+
+    function updateCart() {
+      var cartContainer = document.getElementById('cartContainer');
+      var cartList = document.getElementById('cartList');
+      var totalElement = document.getElementById('total');
+
+      // Update the cart list
+      cartList.innerHTML = '';
+      var total = 0;
+      for (var i = 0; i < cart.length; i++) {
+        var item = cart[i];
+        var itemHtml = `
+          <div class="cart-item">
+            <span>${item.name}</span>
+            <span>${item.price}</span>
+            <span>${item.quantity}</span>
+            <span>${item.total}</span>
+            <button onclick="removeItem(${i})">Remove</button>
+          </div>
+        `;
+        cartList.innerHTML += itemHtml;
+        total += item.total;
+      }
+
+      // Update the total
+      totalElement.textContent = 'Total: ' + total.toFixed(2);
+
+      // Show the cart container if there are items in the cart
+      cartContainer.style.display = cart.length > 0 ? 'block' : 'none';
+    }
+
+    function reviewCart() {
+      // Hide foodVarieties and show the orderForm
+      document.getElementById('foodVarieties').style.display = 'none';
+      document.getElementById('orderForm').style.display = 'block';
+    }
+
+   function placeOrder() {
+    // Gather user details from the form
+    var name = document.getElementById('name').value;
+    var phoneNumber = document.getElementById('phoneNumber').value;
+    var location = document.getElementById('location').value;
+    var paymentMethod = document.getElementById('paymentMethod').value;
+
+    // You can send the order details to a server or perform other actions as needed
+    console.log('Order placed:', { name, phoneNumber, location, cart, paymentMethod });
+
+    // Show order confirmation and reset the cart and form
+    document.getElementById('orderForm').style.display = 'none';
+    document.getElementById('orderConfirmation').style.display = 'block';
+    document.getElementById('confirmedPaymentMethod').textContent = paymentMethod;
+    cart = [];
+    updateCart();
+  }
+
+  function placeAnotherOrder() {
+    // Hide the order confirmation and show the food varieties again
+    document.getElementById('orderConfirmation').style.display = 'none';
+    document.getElementById('foodVarieties').style.display = 'block';
+  }
+
+    function loadPage(pageId) {
+      // Hide all pages
+      var pages = document.querySelectorAll('.page-content');
+      pages.forEach(function (page) {
+        page.style.display = 'none';
+      });
+
+      // Show the selected page
+      var selectedPage = document.getElementById(pageId);
+      if (selectedPage) {
+        selectedPage.style.display = 'block';
+      }
+    }
+    function submitMessage() {
+    // Get form data
+    var name = document.getElementById("contactName").value;
+    var email = document.getElementById("contactEmail").value;
+    var message = document.getElementById("message").value;
+
+    // You can perform additional validation here
+
+    // Simulate form submission
+    alert("Form submitted:\nName: " + name + "\nEmail: " + email + "\nMessage: " + message);
+  }
+ function submitReservation() {
+        // Get form data
+        var name = document.getElementById("name").value;
+        var email = document.getElementById("email").value;
+        var date = document.getElementById("date").value;
+        var time = document.getElementById("time").value;
+
+        // Display a confirmation message
+        alert("Thank you, " + name + "! Your reservation for " + date + " at " + time + " has been confirmed.");
+
+        // You can perform additional actions or send data to the server as needed
+    }
+     // Add these functions to your existing JavaScript code
+
+ function registerUser() {
+      var regUsername = document.getElementById("regUsername").value;
+      var regEmail = document.getElementById("regEmail").value;
+      var regPassword = document.getElementById("regPassword").value;
+
+      // Perform validation and send registration data to the server
+      // Replace 'your_server_endpoint/register' with your actual server endpoint for registration
+      fetch('your_server_endpoint/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username: regUsername, email: regEmail, password: regPassword }),
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Registration successful:', data);
+      })
+      .catch(error => {
+        console.error('Error during registration:', error);
+      });
+    }
+
+    function loginUser() {
+      var loginUsername = document.getElementById("loginUsername").value;
+      var loginPassword = document.getElementById("loginPassword").value;
+
+      // Perform validation and send login data to the server
+      // Replace 'your_server_endpoint/login' with your actual server endpoint for login
+      fetch('your_server_endpoint/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username: loginUsername, password: loginPassword }),
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Login successful:', data);
+      })
+      .catch(error => {
+        console.error('Error during login:', error);
+      });
+    }
+    // Initial load of the 'home' page
+    loadPage('home');
+  </script>
+</body>
+
+</html>
